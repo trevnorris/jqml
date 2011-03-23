@@ -3,7 +3,7 @@
  * This document is licensed as free software under the terms of the
  * MIT License: http://www.opensource.org/licenses/mit-license.php */
 
-(function($, document, window, undefined) {
+(function($, document) {
 	function createObj(elem) {
 		var fragment = document.createDocumentFragment(),
 			i = 0, selector;
@@ -36,4 +36,4 @@
 	$.jqml = function(arg) {
 		return $(createObj(arg));
 	};
-})(this.jQuery, this.document, this);
+})(jQuery, document);
