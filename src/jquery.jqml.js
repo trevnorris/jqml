@@ -6,8 +6,9 @@
 (function( $, document ) {
 
 	function createObj( elem ) {
+		// generate new fragment to store all generated
 		var fragment = document.createDocumentFragment(),
-			i = 0, selector;
+			i = 0, j, selector;
 		// check if is an element or array of elements
 		if ( typeof elem[0] == 'string' ) {
 			selector = document.createElement( elem[0] );
@@ -17,7 +18,14 @@
 		for ( ; i < elem.length; i++ ) {
 			// if array create new element
 			if ( $.isArray( elem[i] )) {
-				fragment.appendChild( createObj( elem[i] ));
+				// to simplify creation of templates, check for array of elements
+				if ( $.isArray( elem[i][0] )) {
+					for ( j = 0; j < elem[i].length; j++ ) {
+						fragment.appendChild( createObj( elem[i][j] ));
+					}
+				} else {
+					fragment.appendChild( createObj( elem[i] ));
+				}
 			// if object set element attributes
 			} else if ( $.isPlainObject( elem[i] )) {
 				// trick to have jQuery assign attributes without creating a new jQuery object

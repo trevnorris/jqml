@@ -39,6 +39,21 @@ $.jqml([ 'table', (function( data ) {
 }( data ))]);
 ```
 
+While passing an array of elements isn't technically correct JsonML, it makes for much easier templating.
+
+```javascript
+$.jqml([ 'div', (function( strings ) {
+	// notice there is no element in the first array item
+	var ptags = [];
+	for ( var i = 0; i < strings.length; i++ ) {
+		ptags.push([ 'p', strings[i]]);
+	}
+	// see how ptags is incorrect JsonML, but so much easier:
+	// ptags == [[ 'p', 'hi' ],[ 'p', 'yall!' ]]
+	return ptags;
+}([ 'hi', 'yall!' ]))]);
+```
+
 If you have a problem, post an issue.
 The plugin is super light weight, under 1K minified, so troubleshooting shouldn't be too hard.
 And let me know if you have any features/improvements you'd like to see.
