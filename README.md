@@ -1,9 +1,16 @@
-jqml - jQuery JsonML Translator
+jqml - jQuery/JavaScript JsonML Translator
 
-The library is included in the `src/` directory in full and minified forms.
-Figured I should include some code examples, so here it goes:
+In `src/` you will find the following files:
 
-To create a new element as a jQuery object just pass in the JsonML.
+* jqml.js - Create DOM from JsonML, requires no additional libraries.
+* jqml.min.js - Minified jqml.js.
+* jquery.jqml.js - jqml implementation specific to jQuery.
+* jquery.jqml.min.js - Minified jquery.jqml.js.
+
+Below are examples of how to use the two libraries.
+The only syntactical difference is that one uses `jQuery.jqml()` and the other uses `jqml()`.
+
+To create a new element just pass in the JsonML.
 
 ```javascript
 $.jqml([ 'div', {
@@ -12,21 +19,7 @@ $.jqml([ 'div', {
 }, [ 'p' ]]);
 ```
 
-One thing I like about my little plugin is that it ties into the jQuery event model.
-So you can attach events to the elements you're creating as they're being created.
-Then easily attach the element to something else.
-
-```javascript
-$.jqml([ 'nav', [ 'a', {
-	'href' : '#link',
-	'click' : function( e ) {
-		e.preventDefault();
-		// do more stuff
-	}
-}]]).prependTo( 'body' );
-```
-
-Also say you need to create a template that prints table rows based on data received from the server.
+Say you need to create a template that prints table rows based on data received from the server.
 Well, just create an immediately executing anonymous function in the JsonML for a quick little template.
 
 ```javascript
@@ -40,6 +33,7 @@ $.jqml([ 'table', (function( data ) {
 ```
 
 While passing an array of elements isn't technically correct JsonML, it makes for much easier templating.
+**Note:** This only works for the jQuery implementation.
 
 ```javascript
 $.jqml([ 'div', (function( strings ) {
@@ -54,6 +48,19 @@ $.jqml([ 'div', (function( strings ) {
 }([ 'hi', 'yall!' ]))]);
 ```
 
+The jQuery plugin also ties into the the jQuery event model.
+So you can attach events to the elements as they're being created.
+
+```javascript
+$.jqml([ 'nav', [ 'a', {
+	'href' : '#link',
+	'click' : function( e ) {
+		e.preventDefault();
+		// do more stuff
+	}
+}]]).prependTo( 'body' );
+```
+
 If you have a problem, post an issue.
-The plugin is super light weight, under 1K minified, so troubleshooting shouldn't be too hard.
+The plugins are super light weight, under 1K minified, so troubleshooting shouldn't be too hard.
 And let me know if you have any features/improvements you'd like to see.
