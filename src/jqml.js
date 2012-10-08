@@ -28,37 +28,45 @@ var toString = Object.prototype.toString,
 				iTem.setAttribute(aKey, args[aKey]);
 		}
 		return iTem;
+	},
+
+	// check if string or number
+	isStringy = function(arg) {
+		return typeof arg === 'string' || typeof arg === 'number';
+	},
+
+	// check if array
+	isArray = Array.isArray || function(arg) {
+		return toString.call(arg) === '[object Array]';
 	};
-
-// Check if string or number
-function isStringy(arg) {
-	var tmp = typeof arg;
-	return tmp === 'string' || tmp === 'number';
-}
-
-// Check if array
-function isArray(arg) {
-	return toString.call(arg) === '[object Array]';
-}
 
 // main function
 function jqml(elems) {
 	// create/set element
-	var node = elems[ 0 ].nodeType ? elems[0] : document.createElement(elems[0]),
-		i = 1;
+	var node = elems[0].nodeType ? elems[0] : document.createElement(elems[0]),
+		i, j;
 	// loop though passed arguments
-	for (; i < elems.length; i++) {
+	for (i = 1; i < elems.length; i++) {
 		// check if string or number
-		isStringy(elems[i])
-			? node.appendChild(document.createTextNode(elems[i]))
+		if (isStringy(elems[i])) {
+			node.appendChild(document.createTextNode(elems[i]));
 		// check if argument is array
-		: isArray(elems[i])
-			? node.appendChild(jqml(elems[i]))
+		} else if (isArray(elems[i])) {
+			if (isArray(elems[i][0])) {
+				for (j = 0; j < elems[i].length; j++) {
+					node.appendChild(jqml(elems[i][j]));
+				}
+			} else {
+				node.appendChild(jqml(elems[i]));
+			}
 		// check if DOM element
-		: elems[i].nodeType
-			? node.appendChild(elems[i])
+		} else if (elems[i].nodeType) {
+			node.appendChild(elems[i]);
 		// set element attributes
-		: setEleAttr(elems[i], node);
+		} else {
+			setEleAttr(elems[i], node);
+		}
+
 	}
 	return node;
 };

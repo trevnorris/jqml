@@ -33,7 +33,6 @@ $.jqml([ 'table', (function( data ) {
 ```
 
 While passing an array of elements isn't technically correct JsonML, it makes for much easier templating.
-**Note:** This only works for the jQuery implementation.
 
 ```javascript
 $.jqml([ 'div', (function( strings ) {
