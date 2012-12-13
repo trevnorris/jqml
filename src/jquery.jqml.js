@@ -3,7 +3,7 @@
  * This document is licensed as free software under the terms of the
  * MIT License: http://www.opensource.org/licenses/mit-license.php */
 
-(function($, document) {
+(function ($, document) {
 
 	function createObj(elem) {
 		// generate new fragment to store all generated
@@ -40,15 +40,18 @@
 		};
 		// if a selector is set append children and return
 		if (selector) {
-			selector.appendChild(fragment);
+			// check if fragment has children to append (thanks IE)
+			if (fragment.hasChildNodes()) {
+				selector.appendChild(fragment);
+			}
 			return selector;
 		};
 		// otherwise return children of fragment
 		return fragment.childNodes;
 	};
 
-	$.jqml = function(arg) {
+	$.jqml = function (arg) {
 		// return new jQuery object of elements
 		return $(createObj(arg));
 	};
-})(jQuery, document);
+}(jQuery, document));
