@@ -17,7 +17,7 @@
 		// loop through all elements in array
 		for (; i < elem.length; i++) {
 			// if array create new element
-			if ($.isArray(elem[i])) {
+			if ($.isArray(elem[i]) && elem[i].length > 0) {
 				// to simplify creation of templates, check for array of elements
 				if ($.isArray(elem[i][0])) {
 					for (j = 0; j < elem[i].length; j++) {
