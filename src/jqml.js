@@ -57,6 +57,9 @@ function jqml(elems) {
 		// check if string or number
 		} else if (isStringy(elems[i])) {
 			node.appendChild(document.createTextNode(elems[i]));
+		// prevent secondary null from crashing the party
+		} else if (null === elems[i]) {
+			{};
 		// check if DOM element
 		} else if (elems[i].nodeType) {
 			node.appendChild(elems[i]);

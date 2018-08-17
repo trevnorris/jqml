@@ -33,6 +33,9 @@
 			// if string, number or boolean insert text node
 			} else if (['string','number','boolean'].indexOf(typeof elem[i]) > -1) {
 				fragment.appendChild(document.createTextNode(elem[i]));
+			// prevent secondary null from crashing the party
+			} else if (null === elem[i]) {
+				{};
 			// if is an element append to fragment
 			} else if (elem[i].nodeType) {
 				fragment.appendChild(elem[i]);
