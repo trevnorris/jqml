@@ -28,9 +28,9 @@ var toString = {}.toString,
 		return iTem;
 	},
 
-	// check if string or number
+	// check if string, number or boolean
 	isStringy = function(arg) {
-		return typeof arg === 'string' || typeof arg === 'number';
+		return (['string','number','boolean'].indexOf(typeof arg) > -1);
 	},
 
 	// check if array

@@ -30,8 +30,8 @@
 			} else if ($.isPlainObject(elem[i])) {
 				// trick to have jQuery assign attributes without creating a new jQuery object
 				$.fn.attr.call([selector], elem[i], true);
-			// if string or number insert text node
-			} else if (typeof elem[i] == 'number' || typeof elem[i] == 'string') {
+			// if string, number or boolean insert text node
+			} else if (['string','number','boolean'].indexOf(typeof elem[i]) > -1) {
 				fragment.appendChild(document.createTextNode(elem[i]));
 			// if is an element append to fragment
 			} else if (elem[i].nodeType) {
